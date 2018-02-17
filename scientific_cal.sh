@@ -9,6 +9,7 @@ echo "enter second no"
 read n2
 while [ $i = "y" ]
 do
+clear
 echo "1.adition"
 echo "2.subtraction"
 echo "3.multiplication"

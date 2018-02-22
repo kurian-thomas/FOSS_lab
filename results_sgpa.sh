@@ -1,17 +1,26 @@
 #!/bin/bash
-clear
-pdftotext -layout /home/kurian/Downloads/result_MDL.pdf /home/kurian/Desktop/test/result1.txt
-tr -d '\040\011\012\014\015' < /home/kurian/Desktop/test/result1.txt >/home/kurian/Desktop/test/result2.txt 
-sed -i 's/MDL16CS/\nMDL16CS/g' /home/kurian/Desktop/test/result2.txt
-grep -v 'APJABDULKALAM'  /home/kurian/Desktop/test/result2.txt > /home/kurian/Desktop/test/result3.txt
-sed 's/ELECTRONICS/\n/g' /home/kurian/Desktop/test/result3.txt > /home/kurian/Desktop/test/result2.txt
-grep 'MDL16CS' /home/kurian/Desktop/test/result2.txt > /home/kurian/Desktop/test/result3.txt
-sed 's/MA101/ /g' /home/kurian/Desktop/test/result3.txt > /home/kurian/Desktop/test/temp1.txt
-cut -d ' ' -f 1 /home/kurian/Desktop/test/temp1.txt  > /home/kurian/Desktop/test/final.txt
 
-while read EachLine
+
+#	CREATE FOLDER CALLED TEST IN DEKSTOP 
+#	REPACE 'kurian' WITH CURRENT USER NAME IN SOURCE CODE (as the whole file location is given)
+
+
+clear
+pdftotext -layout /home/kurian/Downloads/result_MDL.pdf /home/kurian/Desktop/test/result1.txt #converts pdf to text with layout
+tr -d '\040\011\012\014\015' < /home/kurian/Desktop/test/result1.txt >/home/kurian/Desktop/test/result2.txt #deletes all spaces and special characters
+sed -i 's/MDL16CS/\nMDL16CS/g' /home/kurian/Desktop/test/result2.txt #creates a new line after every MDL16CS word
+grep -v 'APJABDULKALAM'  /home/kurian/Desktop/test/result2.txt > /home/kurian/Desktop/test/result3.txt #used to take everything except the matching string
+sed 's/ELECTRONICS/\n/g' /home/kurian/Desktop/test/result3.txt > /home/kurian/Desktop/test/result2.txt # replaces ELECTRONICS with next line character
+grep 'MDL16CS' /home/kurian/Desktop/test/result2.txt > /home/kurian/Desktop/test/result3.txt #get all matching results to another file
+sed 's/MA101/ /g' /home/kurian/Desktop/test/result3.txt > /home/kurian/Desktop/test/temp1.txt #replaces MA101 with space
+cut -d ' ' -f 1 /home/kurian/Desktop/test/temp1.txt  > /home/kurian/Desktop/test/final.txt #cut colomn 1 to get all the registration numbers
+
+
+
+
+while read EachLine  #formatted file is sent line by line to another file for analysis
 do 
-	echo $EachLine > /home/kurian/Desktop/test/line.txt
+	echo $EachLine > /home/kurian/Desktop/test/line.txt  #each subject name is replaced with nothing to get only the grades
 	sed 's/MA101//g' /home/kurian/Desktop/test/line.txt > /home/kurian/Desktop/test/line1.txt
 	sed 's/PH100//g' /home/kurian/Desktop/test/line1.txt > /home/kurian/Desktop/test/line.txt
 	sed 's/BE110//g' /home/kurian/Desktop/test/line.txt > /home/kurian/Desktop/test/line1.txt
@@ -23,9 +32,9 @@ do
 	sed 's/,CS110(/,(/g' /home/kurian/Desktop/test/line.txt >> /home/kurian/Desktop/test/mark.txt
 done < /home/kurian/Desktop/test/temp1.txt
 
-sed 's/,/ /g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final.txt
+sed 's/,/ /g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final.txt #replaces , with space
 
-sed 's/(O)/10/g' /home/kurian/Desktop/test/mark_final.txt > /home/kurian/Desktop/test/mark.txt
+sed 's/(O)/10/g' /home/kurian/Desktop/test/mark_final.txt > /home/kurian/Desktop/test/mark.txt #replaces grades with numeriacal values
 sed 's/(A+)/9/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final.txt
 sed 's/(A)/8/g' /home/kurian/Desktop/test/mark_final.txt > /home/kurian/Desktop/test/mark.txt
 sed 's/(B+)/7/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final.txt
@@ -33,7 +42,8 @@ sed 's/(B)/6/g' /home/kurian/Desktop/test/mark_final.txt > /home/kurian/Desktop/
 sed 's/(C)/5/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final.txt
 sed 's/(P)/4/g' /home/kurian/Desktop/test/mark_final.txt > /home/kurian/Desktop/test/mark.txt
 sed 's/(F)/0/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final.txt
-while read -r line
+
+while read -r line   #each line is converted to an array of strings with each array elemment signifying a word
 do
 	lin="$line"
 	arr=($lin)
@@ -47,17 +57,17 @@ do
     s8=arr[8]
     s9=arr[9]
 
-	it=$((s1*4 + s2*4 + s3*3 + s4*3 + s5*3 + s6*3 + s7 + s8 + s9))
-	echo $it >> /home/kurian/Desktop/test/cgpa1.txt
-	bc <<< "scale=4; $it/23" >> /home/kurian/Desktop/test/sgpa1.txt
+	it=$((s1*4 + s2*4 + s3*3 + s4*3 + s5*3 + s6*3 + s7 + s8 + s9)) #sgpa caluclation
+	echo $it >> /home/kurian/Desktop/test/cgpa1.txt #for cgpa cal
+	bc <<< "scale=4; $it/23" >> /home/kurian/Desktop/test/sgpa1.txt #bc is used to store floating point numbers and is written to a file
 	
 done < /home/kurian/Desktop/test/mark_final.txt 
 
-paste /home/kurian/Desktop/test/final.txt /home/kurian/Desktop/test/sgpa1.txt > /home/kurian/Desktop/test/sgpa_final.txt
+paste /home/kurian/Desktop/test/final.txt /home/kurian/Desktop/test/sgpa1.txt > /home/kurian/Desktop/test/sgpa_final.txt #pasting the results side by side
 
 #------------------------------------------------------------------------------------------------------------------
 
-rm /home/kurian/Desktop/test/final.txt 
+rm /home/kurian/Desktop/test/final.txt  #removing files so that they can be reused
 rm /home/kurian/Desktop/test/line.txt
 rm /home/kurian/Desktop/test/line1.txt 
 rm /home/kurian/Desktop/test/mark.txt 
@@ -68,7 +78,7 @@ rm /home/kurian/Desktop/test/temp1.txt
 rm /home/kurian/Desktop/test/sgpa1.txt 
 
 
-
+					# SAME PROCEDURE IS FOLLOWED FOR SEM 2 AS SHOWED ABOVE
 
 pdftotext -layout /home/kurian/Downloads/result_MDL\(1\).pdf /home/kurian/Desktop/test/result1.txt
 tr -d '\040\011\012\014\015' < /home/kurian/Desktop/test/result1.txt >/home/kurian/Desktop/test/result2.txt 
@@ -139,6 +149,8 @@ rm /home/kurian/Desktop/test/mark_final2.txt
 rm /home/kurian/Desktop/test/mark_final.txt
 rm /home/kurian/Desktop/test/final1.txt
 
+#used to join 2 files with a common attribute (here -reg No )
+
 join <(sort /home/kurian/Desktop/test/sgpa_final.txt) <(sort /home/kurian/Desktop/test/sgpa_final2.txt)> /home/kurian/Desktop/test/final_result.txt
 
 rm /home/kurian/Desktop/test/sgpa_final.txt
@@ -146,8 +158,9 @@ rm /home/kurian/Desktop/test/sgpa_final2.txt
 
 paste /home/kurian/Desktop/test/cgpa1.txt /home/kurian/Desktop/test/cgpa2.txt > /home/kurian/Desktop/test/cgpa_temp.txt
 
+#CGPA CAL
 
-while read -r line
+while read -r line 
 do
 	lin="$line"
 	arr=($lin)
@@ -178,4 +191,4 @@ join <(sort /home/kurian/Desktop/test/result.txt) <(sort /home/kurian/Desktop/te
  rm /home/kurian/Desktop/test/c4b.txt
  rm /home/kurian/Desktop/test/result.txt
 
- mv rm /home/kurian/Desktop/test/final_result.txt rm /home/kurian/Desktop/test/result.txt 
+ mv /home/kurian/Desktop/test/final_result.txt /home/kurian/Desktop/test/result.txt 

@@ -1,8 +1,10 @@
 #!/bin/bash
 
 
-#	CREATE FOLDER CALLED TEST IN DEKSTOP 
-#	REPACE 'kurian' WITH CURRENT USER NAME IN SOURCE CODE (as the whole file location is given)
+#	COPY TEST FOLDER CALLED TEST INTO DEKSTOP 
+#	REPLACE 'kurian' WITH CURRENT USER NAME IN SOURCE CODE (as the whole file location is given)
+#	CHECK FILE LOCATIONS AND CHANGE IF ERRORS ARE FOUND
+#	MAKE SURE INTERNET IS CONNECTED AND WORKING  
 
 
 clear
@@ -142,7 +144,7 @@ rm /home/kurian/Desktop/test/line1.txt
 rm /home/kurian/Desktop/test/mark.txt 
 rm /home/kurian/Desktop/test/result1.txt 
 rm /home/kurian/Desktop/test/result2.txt 
-rm /home/kurian/Desktop/test/result3.txt 
+rm /home/kYurian/Desktop/test/result3.txt 
 rm /home/kurian/Desktop/test/temp1.txt  
 rm /home/kurian/Desktop/test/sgpa2.txt 
 rm /home/kurian/Desktop/test/mark_final2.txt
@@ -179,7 +181,7 @@ paste /home/kurian/Desktop/test/final_result.txt /home/kurian/Desktop/test/cgpa_
 rm /home/kurian/Desktop/test/cgpa_final.txt
 rm /home/kurian/Desktop/test/final_result.txt
 
-curl -o /home/kurian/Desktop/test/c4b.txt http://14.139.184.212/ask/c4b/c4b.txt
+curl -o /home/kurian/Desktop/test/c4b.txt http://14.139.184.212/ask/c4b/c4b.txt #USED TO DOWNLOAD FILES FROM INTERNET TO SPECIFIED DIRECTOR
 
 cut -f 4,5 /home/kurian/Desktop/test/c4b.txt > /home/kurian/Desktop/test/names.txt
 grep 'MDL16CS' /home/kurian/Desktop/test/names.txt > /home/kurian/Desktop/test/names_final.txt

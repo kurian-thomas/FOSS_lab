@@ -131,7 +131,7 @@ do
     s8=arr[8]
     s9=arr[9]
 
-	itt=$(($s1*4 + $s2*4 + $s3*3 + $s4*3 + $s5 + $s6*3 + $s7 + $s8 + $s9*4))
+	itt=$(($s1*4 + $s2*4 + $s3*3 + $s4 + $s5 + $s6*4 + $s7*3 + $s8*3 + $s9))
 	echo $itt >> /home/kurian/Desktop/test/cgpa2.txt
 	bc <<< "scale=4; $itt/24" >> /home/kurian/Desktop/test/sgpa2.txt
 	

@@ -192,5 +192,5 @@ join <(sort /home/kurian/Desktop/test/result.txt) <(sort /home/kurian/Desktop/te
  rm /home/kurian/Desktop/test/names.txt
  rm /home/kurian/Desktop/test/c4b.txt
  rm /home/kurian/Desktop/test/result.txt
-
+ rm /home/kurian/Desktop/test/result3.txt
  mv /home/kurian/Desktop/test/final_result.txt /home/kurian/Desktop/test/result.txt 

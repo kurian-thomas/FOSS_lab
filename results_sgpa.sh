@@ -36,32 +36,37 @@ done < /home/kurian/Desktop/test/temp1.txt
 
 sed 's/,/ /g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final.txt #replaces , with space
 
-sed 's/(O)/10/g' /home/kurian/Desktop/test/mark_final.txt > /home/kurian/Desktop/test/mark.txt #replaces grades with numeriacal values
+sed 's/(O)/10/g' /home/kurian/Desktop/test/mark_final.txt > /home/kurian/Desktop/test/mark.txt #replaces grades with values 
 sed 's/(A+)/9/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final.txt
-sed 's/(A)/8/g' /home/kurian/Desktop/test/mark_final.txt > /home/kurian/Desktop/test/mark.txt
-sed 's/(B+)/7/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final.txt
-sed 's/(B)/6/g' /home/kurian/Desktop/test/mark_final.txt > /home/kurian/Desktop/test/mark.txt
-sed 's/(C)/5/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final.txt
-sed 's/(P)/4/g' /home/kurian/Desktop/test/mark_final.txt > /home/kurian/Desktop/test/mark.txt
+sed 's/(A)/8.5/g' /home/kurian/Desktop/test/mark_final.txt > /home/kurian/Desktop/test/mark.txt
+sed 's/(B+)/8/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final.txt
+sed 's/(B)/7/g' /home/kurian/Desktop/test/mark_final.txt > /home/kurian/Desktop/test/mark.txt
+sed 's/(C)/6/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final.txt
+sed 's/(P)/5/g' /home/kurian/Desktop/test/mark_final.txt > /home/kurian/Desktop/test/mark.txt
 sed 's/(F)/0/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final.txt
+
 
 while read -r line   #each line is converted to an array of strings with each array elemment signifying a word
 do
 	lin="$line"
 	arr=($lin)
-    s1=arr[1]
-    s2=arr[2] 
-    s3=arr[3]
-    s4=arr[4]
-    s5=arr[5]
-    s6=arr[6]
-    s7=arr[7]
-    s8=arr[8]
-    s9=arr[9]
 
-	it=$((s1*4 + s2*4 + s3*3 + s4*3 + s5*3 + s6*3 + s7 + s8 + s9)) #sgpa caluclation
-	echo $it >> /home/kurian/Desktop/test/cgpa1.txt #for cgpa cal
-	bc <<< "scale=4; $it/23" >> /home/kurian/Desktop/test/sgpa1.txt #bc is used to store floating point numbers and is written to a file
+
+	s1=$(bc <<< "scale=2; ${arr[1]}*4 ")
+	s2=$(bc <<< "scale=2; ${arr[2]}*4 ")
+	s3=$(bc <<< "scale=2; ${arr[3]}*3 ")
+	s4=$(bc <<< "scale=2; ${arr[4]}*3 ")
+	s5=$(bc <<< "scale=2; ${arr[5]}*3 ")
+	s6=$(bc <<< "scale=2; ${arr[6]}*3 ")
+	s7=$(bc <<< "scale=2; ${arr[7]}*1 ")
+	s8=$(bc <<< "scale=2; ${arr[8]}*1 ")
+	s9=$(bc <<< "scale=2; ${arr[9]}*1 ")
+
+
+	x=$(bc <<< "scale=4; ($s1) + ($s2) + ($s3) + ($s4) + ($s5) + ($s6) + ($s7) + ($s8) + ($s9)")
+	echo $x >> /home/kurian/Desktop/test/cgpa1.txt #sgpa cal
+	y=$(bc <<< "scale=4; $x/23")
+	echo $y >> /home/kurian/Desktop/test/sgpa1.txt #bc is used to store floating point numbers and is written to a file
 	
 done < /home/kurian/Desktop/test/mark_final.txt 
 
@@ -110,31 +115,36 @@ sed 's/,/ /g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mar
 
 sed 's/(O)/10/g' /home/kurian/Desktop/test/mark_final2.txt > /home/kurian/Desktop/test/mark.txt
 sed 's/(A+)/9/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final2.txt
-sed 's/(A)/8/g' /home/kurian/Desktop/test/mark_final2.txt > /home/kurian/Desktop/test/mark.txt
-sed 's/(B+)/7/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final2.txt
-sed 's/(B)/6/g' /home/kurian/Desktop/test/mark_final2.txt > /home/kurian/Desktop/test/mark.txt
-sed 's/(C)/5/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final2.txt
-sed 's/(P)/4/g' /home/kurian/Desktop/test/mark_final2.txt > /home/kurian/Desktop/test/mark.txt
+sed 's/(A)/8.5/g' /home/kurian/Desktop/test/mark_final2.txt > /home/kurian/Desktop/test/mark.txt
+sed 's/(B+)/8/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final2.txt
+sed 's/(B)/7/g' /home/kurian/Desktop/test/mark_final2.txt > /home/kurian/Desktop/test/mark.txt
+sed 's/(C)/6/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final2.txt
+sed 's/(P)/5/g' /home/kurian/Desktop/test/mark_final2.txt > /home/kurian/Desktop/test/mark.txt
 sed 's/(F)/0/g' /home/kurian/Desktop/test/mark.txt > /home/kurian/Desktop/test/mark_final2.txt
 
 while read -r line
 do
 	lin="$line"
-	arr=($lin)
-    s1=arr[1]
-    s2=arr[2] 
-    s3=arr[3]
-    s4=arr[4]
-    s5=arr[5]
-    s6=arr[6]
-    s7=arr[7]
-    s8=arr[8]
-    s9=arr[9]
+		
 
-	itt=$(($s1*4 + $s2*4 + $s3*3 + $s4 + $s5 + $s6*4 + $s7*3 + $s8*3 + $s9))
-	echo $itt >> /home/kurian/Desktop/test/cgpa2.txt
-	bc <<< "scale=4; $itt/24" >> /home/kurian/Desktop/test/sgpa2.txt
-	
+	arr=($lin)
+
+
+	s1=$(bc <<< "scale=2; ${arr[1]}*4 ")
+	s2=$(bc <<< "scale=2; ${arr[2]}*4 ")
+	s3=$(bc <<< "scale=2; ${arr[3]}*3 ")
+	s4=$(bc <<< "scale=2; ${arr[4]}*1 ")
+	s5=$(bc <<< "scale=2; ${arr[5]}*1 ")
+	s6=$(bc <<< "scale=2; ${arr[6]}*4 ")
+	s7=$(bc <<< "scale=2; ${arr[7]}*3 ")
+	s8=$(bc <<< "scale=2; ${arr[8]}*3 ")
+	s9=$(bc <<< "scale=2; ${arr[9]}*1 ")
+
+
+	x=$(bc <<< "scale=4; ($s1) + ($s2) + ($s3) + ($s4) + ($s5) + ($s6) + ($s7) + ($s8) + ($s9)")
+	echo $x >> /home/kurian/Desktop/test/cgpa2.txt #sgpa cal
+	y=$(bc <<< "scale=4; $x/24")
+	echo $y >> /home/kurian/Desktop/test/sgpa2.txt #bc is used to store floating point numbers and is written to a fi
 done < /home/kurian/Desktop/test/mark_final2.txt 
 
 paste /home/kurian/Desktop/test/final1.txt /home/kurian/Desktop/test/sgpa2.txt > /home/kurian/Desktop/test/sgpa_final2.txt
@@ -168,8 +178,9 @@ do
 	arr=($lin)
     a=${arr[0]}
     b=${arr[1]}
- 	c=$((a + b))
-	bc <<< "scale=4; $c/47" >> /home/kurian/Desktop/test/cgpa_final.txt
+ 	c=$(bc <<< "scale=4; ($a)+($b)")
+	e=$(bc <<< "scale=4; ($c)/47")
+	echo $e >> /home/kurian/Desktop/test/cgpa_final.txt
 	
 done < /home/kurian/Desktop/test/cgpa_temp.txt 
 
@@ -194,3 +205,4 @@ join <(sort /home/kurian/Desktop/test/result.txt) <(sort /home/kurian/Desktop/te
  rm /home/kurian/Desktop/test/result.txt
  rm /home/kurian/Desktop/test/result3.txt
  mv /home/kurian/Desktop/test/final_result.txt /home/kurian/Desktop/test/result.txt 
+

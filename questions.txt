@@ -1,0 +1,18 @@
+questions 
+
+Shell script programs
+1. Write a shell script to print odd numbered lines from a file
+2. Write to compare 3 values taken as command line argument and print the largest value?
+3. Write a shell script to find out timestamp of the file creation?
+4.  Write a shell script to file back at 12 noon ?
+5. Write a shell script ,use sed  editor  use the string “ This is  a test  of the test script ”
+(i).Replace the string first ‘test’ with   ‘ trial’.
+(ii).consider a string “ the quick brown fox jumps over the lazy dog” –
+ Print the following output  using single commad
+the quick brown fox jumps over the lazy dog
+the quick brown elephant  jumps over the lazy cat.
+the quick brown fox jumps over the lazy dog
+the quick brown fox jumps over the lazy dog.
+(iii). Delete specific lines of text in a text stream.
+
+

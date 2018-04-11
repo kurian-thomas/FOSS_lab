@@ -1,0 +1,9 @@
+STEPS
+
+Download Kernel from kernel.org
+Extrackt
+make nconfig
+make -j2
+sudo make install
+sudo make modules_install
+sudo update-grub

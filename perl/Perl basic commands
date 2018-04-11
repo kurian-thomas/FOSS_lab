@@ -1,0 +1,184 @@
+perl -e 'print "hey there how are you "'
+
+#- single line comment 
+
+=begin 
+	Multiple line comment 
+	Multiple line comment 
+	Multiple line comment 
+cut
+
+# difference between '' and ""
+
+	$a = 10;
+	print "Value of a = $a\n";
+	print 'Value of a = $a\n'
+
+	O/P
+		Value of a = 10
+		Value of a = $a\n$
+
+Datatypes
+
+	1 Scalar
+
+	Scalars are simple variables. They are preceded by a dollar sign ($). A scalar is either a number, a string, or a reference. A reference is actually an address of a variable, which we will see in the upcoming chapters.
+
+	2 Arrays
+
+	Arrays are ordered lists of scalars that you access with a numeric index, which starts with 0. They are preceded by an "at" sign (@).
+
+	3 Hashes
+
+	Hashes are unordered sets of key/value pairs that you access using the keys as subscripts. They are preceded by a percent sign (%).
+
+Creating variables
+
+	$age = 25;             # An integer assignment
+	$name = "John Paul";   # A string  
+	$salary = 1445.50;     # A floating point
+
+	Arrays
+
+	@ages = (25, 30, 40);             
+	@names = ("John Paul", "Lisa", "Kumar");
+
+
+	value of $ages[0] = 25
+
+Key value pairs
+
+	%data = ('John Paul', 45, 'Lisa', 30, 'Kumar', 40);
+
+	print "\$data{'John Paul'} = $data{'John Paul'}\n";
+
+	O/P
+		$data{'John Paul'} = 45
+Scalars
+	$integer = 200;
+	$negative = -300;
+	$floating = 200.340;
+	$bigfloat = -1.2E-23;
+
+String scalars
+	$var = "This is string scalar!";
+	$quote = 'I m inside single quote - $var';
+	$double = "This is inside single quote - $var";
+
+Scalar operations
+	$str = "hello" . "world";       # Concatenates strings.
+	$num = 5 + 10;                  # adds two numbers.
+	$mul = 4 * 5;                   # multiplies two numbers.
+	$mix = $str . $num;             # concatenates string and number.
+
+V-Strings
+	$smile  = v9786;
+	$foo    = v102.111.111;
+	$martin = v77.97.114.116.105.110;
+
+Special literals
+	print "File name ". __FILE__ . "\n";
+	print "Line Number " . __LINE__ ."\n";
+	print "Package " . __PACKAGE__ ."\n";
+
+	# they can not be interpolated
+	print "__FILE__ __LINE__ __PACKAGE__\n";
+
+	O/P
+		File name hello.pl
+		Line Number 4
+		Package main
+		__FILE__ __LINE__ __PACKAGE__ 
+
+IF ELSE STATEMENTS
+	Terinary operator
+		$status = ($age > 60 )? "A senior citizen" : "Not a senior citizen";
+
+LOOPS
+	For loop
+		for( ; ; ) {
+		   printf "This loop will run forever.\n";
+		}
+
+	While loop (same as c)
+
+	do while (same as c)
+
+	foreach
+		foreach var (list) {
+		...
+		}
+
+	Until loop
+		until(condition) {
+	    statement(s);
+		}
+
+OPERATORS (same as every other programming language)
+
+Date and Time 
+	sec,     # seconds of minutes from 0 to 61
+	min,     # minutes of hour from 0 to 59
+	hour,    # hours of day from 0 to 24
+	mday,    # day of month from 1 to 31
+	mon,     # month of year from 0 to 11
+	year,    # year since 1900
+	wday,    # days since sunday
+	yday,    # days since January 1st
+	isdst    # hours of daylight savings time
+
+	$datestring = localtime();
+	print "Local date and time $datestring\n";
+
+	Local date and time Sat Feb 16 06:50:45 2013
+
+Subroutines (functions)
+	sub Hello {
+	   print "Hello, World!\n";
+	}
+
+	# Function call
+	Hello();
+
+	Parameters
+		Average(10, 20, 30);
+
+		#inside the function 
+		sub Average{
+			print"@_[0]" #prints 10
+		}
+
+	Passing Hash functions 
+		# Function definition
+		sub PrintHash {
+		   my (%hash) = @_;
+
+		   foreach my $key ( keys %hash ) {
+		      my $value = $hash{$key};
+		      print "$key : $value\n";
+		   }
+		}
+		%hash = ('name' => 'Tom', 'age' => 19);
+
+		# Function call with hash parameter
+		PrintHash(%hash);
+
+	Returning a value(same)
+
+Sending mail
+	$to = 'abcd@gmail.com';
+	$from = 'webmaster@yourdomain.com';
+	$subject = 'Test Email';
+	$message = 'This is test email sent by Perl Script';
+	 
+	open(MAIL, "|/usr/sbin/sendmail -t");
+	 
+	# Email Header
+	print MAIL "To: $to\n";
+	print MAIL "From: $from\n";
+	print MAIL "Subject: $subject\n\n";
+	# Email Body
+	print MAIL $message;
+
+	close(MAIL);
+	print "Email Sent Successfully\n";
